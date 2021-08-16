@@ -118,7 +118,7 @@ const verifySignedToken = (
 
   // Try verify forged token
   try {
-    const verifiedForgedToken = verifySignedToken(forgedToken, publicKey);
+    const verifiedForgedToken = await verifySignedToken(forgedToken, publicKey);
     console.log("verifiedForgedTokenPayload:", verifiedForgedToken);
   } catch (e) {
     console.error("Could not verify forged token:", e);
