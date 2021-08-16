@@ -20,6 +20,7 @@ const getSignedToken = (
   // Current time in seconds
   const now = Math.round(new Date().getTime() / 1000);
 
+  // Claims as used in Fluid Framework
   const claims = {
     documentId,
     scopes: ["doc:read", "doc:write", "summary:write"],
@@ -52,6 +53,7 @@ const forgeToken = (
   // Current time in seconds
   const now = Math.round(new Date().getTime() / 1000);
 
+  // Claims as used in Fluid Framework
   const claims = {
     documentId,
     scopes: ["doc:read", "doc:write", "summary:write"],
@@ -78,6 +80,7 @@ const verifySignedToken = (
   _publicKey: string
 ): Promise<jwt.JwtPayload> => {
   return new Promise((resolve, reject) => {
+    // Asynchronously verify token, as in Fluid Service
     jwt.verify(_token, _publicKey, (error, decodedPayload) => {
       if (error) {
         reject(error);
@@ -89,12 +92,14 @@ const verifySignedToken = (
 };
 
 (async () => {
+  // Sign token with private key
   const token = getSignedToken(
     "Routerlicious-Asymmetric-Tenant-Experiment",
     "tags_TEXT_refactored_022"
   );
   console.log("token:", token);
 
+  // Verify token with public key
   try {
     const verifiedPayload = await verifySignedToken(token, publicKey);
     console.log("verifiedPayload:", verifiedPayload);
@@ -102,6 +107,7 @@ const verifySignedToken = (
     console.error("Could not verify token:", e);
   }
 
+  // Forge token by using public key with symmetric algorithm
   const forgedToken = forgeToken(
     publicKey,
     "Routerlicious-Asymmetric-Tenant-Experiment",
@@ -110,6 +116,7 @@ const verifySignedToken = (
 
   console.log("forgedToken:", forgedToken);
 
+  // Try verify forged token
   try {
     const verifiedForgedToken = verifySignedToken(forgedToken, publicKey);
     console.log("verifiedForgedTokenPayload:", verifiedForgedToken);
