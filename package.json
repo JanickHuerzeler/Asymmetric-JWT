@@ -1,0 +1,23 @@
+{
+  "name": "asymmetric-jwt",
+  "version": "1.0.0",
+  "description": "Testint JWT library with asymmetric key",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.5.4",
+    "@types/node": "^16.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "jsrsasign": "^10.3.2",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/jsrsasign": "^8.0.13"
+  }
+}
